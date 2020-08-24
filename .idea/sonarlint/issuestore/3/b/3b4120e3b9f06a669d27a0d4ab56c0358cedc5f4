@@ -1,0 +1,14 @@
+
+Esquid:S1444"+Make this "public static WIDTH" field final(äÔ½ûýÿÿÿÿ
+gsquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(×äÎ¹8µ»ø…À.
+esquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(Ü÷Ò£ÿÿÿÿÿ
+‚"squid:ClassVariableVisibilityCheck"QMake WIDTH a static final constant or non-public and provide accessors if needed.(äÔ½ûýÿÿÿÿ
+9squid:S1659"Declare "y" on a separate line.(±šß¯ùÿÿÿÿ
+jsquid:S3008"PRename this field "HIGHT" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(”ßí»þÿÿÿÿ
+usquid:S00120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(¢”¢ûÿÿÿÿ
+‚"squid:ClassVariableVisibilityCheck"QMake HIGHT a static final constant or non-public and provide accessors if needed.(”ßí»þÿÿÿÿ
+Esquid:S1444"+Make this "public static HIGHT" field final(”ßí»þÿÿÿÿ
+Fsquid:S1135"2Complete the task associated to this TODO comment.(¹º‹3
+jsquid:S3008"PRename this field "WIDTH" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(äÔ½ûýÿÿÿÿ
+ksquid:S00116"URename this field "TANK_WIGHT" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(’ôÑ®
+ksquid:S00116"URename this field "TANK_HIGHT" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¡ÆƒÝ

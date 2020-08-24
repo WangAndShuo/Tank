@@ -1,0 +1,23 @@
+
+csquid:S00112"FDefine and throw a dedicated exception instead of using a generic one.(ÖÈ’¿8Ş§â…À.
+T
+squid:S106"9Replace this use of System.out or System.err by a logger.(ï¹áğ8Ş§â…À.
+"squid:ClassVariableVisibilityCheck"NMake gf a static final constant or non-public and provide accessors if needed.(—ÚŸ8•´è…À.
+f
+squid:S128"LEnd this switch case with an unconditional break, return or throw statement.(óúíC8Ş§â…À.
+…"squid:ClassVariableVisibilityCheck"RMake bullet a static final constant or non-public and provide accessors if needed.(øéıŒ8Ğıè…À.
+lsquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(²ÿ²™ÿÿÿÿÿ8Ş§â…À.
+@squid:S1948"$Make "gf" transient or serializable.(—ÚŸ8ŠŸŠ…À.
+Isquid:S1659"(Declare "GAME_HIGHT" on a separate line.(Ø³€ùÿÿÿÿ8Ş§â…À.
+Dsquid:S1185"(Remove this method to simply inherit it.(‚à°Ğ8Ş§â…À.
+Fsquid:S1948"*Make "explodes" transient or serializable.(¨âñ‰8ÀşÒƒÀ.
+‡"squid:ClassVariableVisibilityCheck"TMake explodes a static final constant or non-public and provide accessors if needed.(¨âñ‰8Ş§â…À.
+Lsquid:S1948"0Make "offScreenImage" transient or serializable.(ÁŸãù8Ş§â…À.
+Y
+squid:S106"9Replace this use of System.out or System.err by a logger.(–‹„£ûÿÿÿÿ8Ş§â…À.
+Bsquid:S1948"'Make "tanks" transient or serializable.(™–88Ş§â…À.
+Isquid:S1948"(Make "myTank" transient or serializable.(ÆÆ­ûÿÿÿÿ8Ş§â…À.
+Dsquid:S1948"(Make "bullet" transient or serializable.(øéıŒ8Ş§â…À.
+Jsquid:S1948")Make "explode" transient or serializable.(øŸ–ğşÿÿÿÿ8ÀşÒƒÀ.
+Y
+squid:S106"9Replace this use of System.out or System.err by a logger.(Ë—Â¾şÿÿÿÿ8Ş§â…À.

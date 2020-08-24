@@ -1,0 +1,10 @@
+#tanks count at initialization
+initTankCount=10
+
+
+
+
+#firStrategy Extensibility Scalability
+goodFs=com.shuo.tank.strategy.FourDirFireStrategy
+badFs=com.shuo.tank.strategy.DefalutFireStrategy
+
