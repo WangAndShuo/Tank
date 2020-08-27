@@ -1,6 +1,5 @@
 package com.shuo.tank;
 
-import com.shuo.tank.abstractFactory.BaseBullet;
 import com.shuo.tank.enums.Dir;
 import com.shuo.tank.enums.Group;
 import com.shuo.tank.resources.ResourceMgr;
@@ -10,7 +9,7 @@ import java.awt.*;
 /**
  * 子弹类
  */
-public class Bullet extends BaseBullet{
+public class Bullet {
     private static final int SPEED =  20;
     private int x,y;
     private Dir dir;
@@ -20,24 +19,24 @@ public class Bullet extends BaseBullet{
     private final int TANK_HIGHT = ResourceMgr.goodtankD.getHeight();
     private Group group = Group.BAD;
     private boolean living = true;
-    private  TankFrame tf;
+    private GameModel gm = null;
     Rectangle rect = new Rectangle();
-    public Bullet(int x,  int y, Dir dir,Group group, TankFrame tf) {
+    public Bullet(int x,  int y, Dir dir,Group group, GameModel gm) {
         this.x = x;
         this.y = y;
         this.dir = dir;
-        this.tf = tf;
+        this.gm = gm;
         this.group = group;
         rect.x = this.x;
         rect.y = this.y;
         rect.width = WIDTH;
         rect.height = HIGHT;
-        tf.bullet.add(this);
+        gm.bullet.add(this);
     }
 
     public void paint(Graphics g){
         if(!this.living){
-            tf.bullet.remove(this);
+            gm.bullet.remove(this);
         }
         setBulletDir(g);
         move();
@@ -73,7 +72,7 @@ public class Bullet extends BaseBullet{
             tank.die();
             int ex = tank.getX() + (TANK_WIGHT - WIDTH)/2;
             int ey = tank.getY() + (TANK_HIGHT - HIGHT)/2;
-            tf.explodes.add(tf.gf.createExplode(ex,ey,tf));
+            gm.explodes.add(new Explode(ex,ey,gm));
         }
     }
 

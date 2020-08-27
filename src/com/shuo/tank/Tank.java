@@ -1,6 +1,5 @@
 package com.shuo.tank;
 
-import com.shuo.tank.abstractFactory.BaseTank;
 import com.shuo.tank.enums.Dir;
 import com.shuo.tank.enums.Group;
 import com.shuo.tank.resources.PropertyMgr;
@@ -16,15 +15,14 @@ import java.util.Random;
 /**
  * 坦克类
  */
-public class Tank extends BaseTank{
+public class Tank {
     public int x, y ;
     private Dir dir = Dir.DOWN;
     private final int SPEED = 5;
     private boolean moving = false;
-    //    private final int TANK_WIGHT = 8,TANK_HIGHT = 8;
     public  final int TANK_WIGHT = ResourceMgr.goodtankD.getWidth();
     public  final int TANK_HIGHT = ResourceMgr.goodtankD.getHeight();
-    private TankFrame tf = null;
+    private GameModel gm = null;
     private boolean living = true;
     private Group group = Group.BAD;
     Random random = new Random();
@@ -32,11 +30,11 @@ public class Tank extends BaseTank{
     FireStrategy fs;
 
 
-    public Tank( int x,  int y,  Dir dir,Group group, TankFrame tf) throws ClassNotFoundException, IllegalAccessException, InstantiationException {
+    public Tank( int x,  int y,  Dir dir,Group group, GameModel gm) throws ClassNotFoundException, IllegalAccessException, InstantiationException {
         this.x = x;
         this.y = y;
         this.dir = dir;
-        this.tf = tf;
+        this.gm = gm;
         this.group = group;
         if(group == Group.BAD){
             moving = true;
@@ -79,7 +77,7 @@ public class Tank extends BaseTank{
 
     //发射子弹
     public void  fire() {
-        if(tf.bullet.size() <=  50){
+        if(gm.bullet.size() <=  50){
 
             //策略模式
             fs.fire(this);
@@ -194,8 +192,8 @@ public class Tank extends BaseTank{
     //子弹射击死亡
     public void die() {
         living = false;
-        tf.tanks.remove(this);
-        tf.explode = new Explode(this.x,this.y,tf);
+        gm.tanks.remove(this);
+        gm.explode = new Explode(this.x,this.y,gm);
     }
 
     public int getX() {
@@ -240,10 +238,13 @@ public class Tank extends BaseTank{
         return TANK_HIGHT;
     }
 
-    public TankFrame getTf() {
-        return tf;
+    public GameModel getGm() {
+        return gm;
     }
 
+    public void setGm(final GameModel gm) {
+        this.gm = gm;
+    }
 
     public boolean isLiving() {
         return living;
