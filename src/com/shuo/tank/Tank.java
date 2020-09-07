@@ -15,7 +15,7 @@ import java.util.Random;
 /**
  * 坦克类
  */
-public class Tank {
+public class Tank extends GameObject{
     public int x, y ;
     private Dir dir = Dir.DOWN;
     private final int SPEED = 5;
@@ -56,6 +56,7 @@ public class Tank {
     }
 
     //画坦克
+    @Override
     public void paint(Graphics g){
         if(!living){return;}
         switch (dir){
@@ -77,7 +78,7 @@ public class Tank {
 
     //发射子弹
     public void  fire() {
-        if(gm.bullet.size() <=  50){
+        if(gm.list.size() <=  50){
 
             //策略模式
             fs.fire(this);
@@ -192,8 +193,12 @@ public class Tank {
     //子弹射击死亡
     public void die() {
         living = false;
-        gm.tanks.remove(this);
+        gm.remove(this);
         gm.explode = new Explode(this.x,this.y,gm);
+    }
+
+    public  void stop(){
+        this.moving = false;
     }
 
     public int getX() {

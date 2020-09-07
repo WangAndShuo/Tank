@@ -9,7 +9,7 @@ import java.awt.*;
 /**
  * 子弹类
  */
-public class Bullet {
+public class Bullet  extends GameObject{
     private static final int SPEED =  20;
     private int x,y;
     private Dir dir;
@@ -17,7 +17,7 @@ public class Bullet {
     public static int HIGHT = ResourceMgr.bulletL.getHeight();
     private final int TANK_WIGHT = ResourceMgr.goodtankD.getWidth();
     private final int TANK_HIGHT = ResourceMgr.goodtankD.getHeight();
-    private Group group = Group.BAD;
+    public Group group = Group.BAD;
     private boolean living = true;
     private GameModel gm = null;
     Rectangle rect = new Rectangle();
@@ -31,12 +31,13 @@ public class Bullet {
         rect.y = this.y;
         rect.width = WIDTH;
         rect.height = HIGHT;
-        gm.bullet.add(this);
+        gm.add(this);
     }
 
+    @Override
     public void paint(Graphics g){
         if(!this.living){
-            gm.bullet.remove(this);
+            gm.remove(this);
         }
         setBulletDir(g);
         move();
@@ -61,8 +62,8 @@ public class Bullet {
 
     }
 
-    public void collideWith(Tank tank){
-        if(this.group == tank.getGroup()) return;
+    public boolean collideWith(Tank tank){
+        if(this.group == tank.getGroup()) return false;
 
         //TODO: 用一个rect来记录子弹的位置
 //        Rectangle rect1 = new Rectangle(this.x,this.y,WIDTH,HIGHT);
@@ -72,8 +73,10 @@ public class Bullet {
             tank.die();
             int ex = tank.getX() + (TANK_WIGHT - WIDTH)/2;
             int ey = tank.getY() + (TANK_HIGHT - HIGHT)/2;
-            gm.explodes.add(new Explode(ex,ey,gm));
+            gm.add(new Explode(ex,ey,gm));
+            return true;
         }
+        return false;
     }
 
     private void die() {

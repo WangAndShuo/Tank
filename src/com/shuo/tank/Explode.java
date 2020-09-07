@@ -7,7 +7,7 @@ import java.awt.*;
 /**
  * 爆炸类
  */
-public class Explode{
+public class Explode  extends GameObject{
 
     private int x, y;
     public static int WIDTH = ResourceMgr.explodes[0].getWidth();
@@ -23,10 +23,11 @@ public class Explode{
 //        audio.play();
     }
 
+    @Override
     public void paint(Graphics g) {
        g.drawImage(ResourceMgr.explodes[step++],x,y,null);
        if(step >= ResourceMgr.explodes.length){
-           gm.explodes.remove(this);
+           gm.remove(this);
        }
     }
 
