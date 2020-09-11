@@ -9,12 +9,17 @@ import com.shuo.tank.enums.Group;
 import com.shuo.tank.resources.PropertyMgr;
 
 import java.awt.*;
-import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 public class GameModel extends  Frame{
+
+    public static final GameModel INSTANCE = new GameModel();
+
+    public static GameModel getInstance(){
+        return  INSTANCE;
+    }
 
     public static final int GAME_WIDTH = 800,GAME_HIGHT = 600;
     public Dir dir = Dir.DOWN;    //方向枚举
@@ -37,12 +42,17 @@ public class GameModel extends  Frame{
         this.list.remove(gameObject);
     }
 
-    public GameModel() throws Exception {
+    public GameModel() {
         int initTankCount = Integer.parseInt((String) PropertyMgr.get("initTankCount"));
         //初始化敌方坦克
         for (int i =0; i< initTankCount; i++){
             this.add(new Tank(50 + i*75,200, Dir.DOWN, Group.BAD,this));
         }
+
+        add(new Wall(152,150,100,50));
+        add(new Wall(550,150,100,50));
+        add(new Wall(300,300,50,50));
+        add(new Wall(500,300,50,50));
 //        setVisible(true);
 //        setResizable(false);
 //        setTitle("tank war");
@@ -111,7 +121,6 @@ public class GameModel extends  Frame{
 //                tankTankCollider.collide(o1, o2);
             }
         }
-
     }
 
 

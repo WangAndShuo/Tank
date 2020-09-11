@@ -17,6 +17,7 @@ import java.util.Random;
  */
 public class Tank extends GameObject{
     public int x, y ;
+    public int oldx, oldy ;
     private Dir dir = Dir.DOWN;
     private final int SPEED = 5;
     private boolean moving = false;
@@ -30,7 +31,7 @@ public class Tank extends GameObject{
     FireStrategy fs;
 
 
-    public Tank( int x,  int y,  Dir dir,Group group, GameModel gm) throws ClassNotFoundException, IllegalAccessException, InstantiationException {
+    public Tank( int x,  int y,  Dir dir,Group group, GameModel gm) {
         this.x = x;
         this.y = y;
         this.dir = dir;
@@ -39,10 +40,26 @@ public class Tank extends GameObject{
         if(group == Group.BAD){
             moving = true;
             String FsName = (String)PropertyMgr.get("badFs");
-            fs = (FireStrategy) Class.forName(FsName).newInstance();
+            try {
+                fs = (FireStrategy) Class.forName(FsName).newInstance();
+            } catch (InstantiationException e) {
+                e.printStackTrace();
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
         }else{
             String FsName = (String)PropertyMgr.get("goodFs");
-            fs = (FireStrategy) Class.forName(FsName).newInstance();
+            try {
+                fs = (FireStrategy) Class.forName(FsName).newInstance();
+            } catch (InstantiationException e) {
+                e.printStackTrace();
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
 
         }
         rect.x = this.x;
@@ -103,6 +120,8 @@ public class Tank extends GameObject{
 
     //移动
     private void move(Graphics g) {
+        oldx = x;
+        oldy = y;
         if(!moving){
             return;
         }
@@ -197,6 +216,12 @@ public class Tank extends GameObject{
         gm.explode = new Explode(this.x,this.y,gm);
     }
 
+    public void back(){
+        x = oldx;
+        y = oldy;
+    }
+
+
     public  void stop(){
         this.moving = false;
     }
@@ -274,4 +299,5 @@ public class Tank extends GameObject{
     public void setRect(final Rectangle rect) {
         this.rect = rect;
     }
+
 }
