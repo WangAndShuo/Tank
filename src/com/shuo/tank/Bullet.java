@@ -11,7 +11,6 @@ import java.awt.*;
  */
 public class Bullet  extends GameObject{
     private static final int SPEED =  20;
-    private int x,y;
     private Dir dir;
     public static int WIDTH = ResourceMgr.bulletL.getWidth();
     public static int HIGHT = ResourceMgr.bulletL.getHeight();
@@ -19,29 +18,38 @@ public class Bullet  extends GameObject{
     private final int TANK_HIGHT = ResourceMgr.goodtankD.getHeight();
     public Group group = Group.BAD;
     private boolean living = true;
-    private GameModel gm = null;
     Rectangle rect = new Rectangle();
-    public Bullet(int x,  int y, Dir dir,Group group, GameModel gm) {
+    public Bullet(int x,  int y, Dir dir,Group group) {
         this.x = x;
         this.y = y;
         this.dir = dir;
-        this.gm = gm;
         this.group = group;
         rect.x = this.x;
         rect.y = this.y;
         rect.width = WIDTH;
         rect.height = HIGHT;
-        gm.add(this);
+        GameModel.getInstance().add(this);
     }
 
     @Override
     public void paint(Graphics g){
         if(!this.living){
-            gm.remove(this);
+            GameModel.getInstance().remove(this);
         }
         setBulletDir(g);
         move();
     }
+
+    @Override
+    public int getWidth() {
+        return WIDTH;
+    }
+
+    @Override
+    public int getHeight() {
+        return HIGHT;
+    }
+
     public void setBulletDir(Graphics g){
         switch (dir){
             case  LEFT:
@@ -73,13 +81,13 @@ public class Bullet  extends GameObject{
             tank.die();
             int ex = tank.getX() + (TANK_WIGHT - WIDTH)/2;
             int ey = tank.getY() + (TANK_HIGHT - HIGHT)/2;
-            gm.add(new Explode(ex,ey,gm));
+            GameModel.getInstance().add(new Explode(ex,ey));
             return true;
         }
         return false;
     }
 
-    private void die() {
+    public void die() {
         living = false;
     }
 

@@ -50,7 +50,7 @@ public class TankFrame extends Frame {
     //首界面画笔
     @Override
     public void paint(Graphics g) {
-        gameModel.paint(g);
+        GameModel.getInstance().paint(g);
 
 //        System.out.println("new paint: "+ new Date());
 //        //子弹数量介绍
@@ -151,7 +151,7 @@ public class TankFrame extends Frame {
                     bL = false;
                     break;
                 case KeyEvent.VK_CONTROL:
-                    gameModel.getMainTank().fire();
+                    GameModel.getInstance().getMainTank().fire();
                 default:
                     break;
             }
@@ -160,7 +160,7 @@ public class TankFrame extends Frame {
 
         //根据条件设置坦克方向
         private void setMainTankDir() {
-            Tank myTank = gameModel.getMainTank();
+            Tank myTank = GameModel.getInstance().getMainTank();
             if(!bL && !bU && !bR &&! bD){
                 myTank.setMoving(false);
             }else{

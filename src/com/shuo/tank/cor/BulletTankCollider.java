@@ -1,9 +1,6 @@
 package com.shuo.tank.cor;
 
-import com.shuo.tank.Bullet;
-import com.shuo.tank.Explode;
-import com.shuo.tank.GameObject;
-import com.shuo.tank.Tank;
+import com.shuo.tank.*;
 
 import java.awt.*;
 
@@ -15,17 +12,19 @@ public class BulletTankCollider implements Collider{
             Bullet b = (Bullet)o1;
             Tank t = (Tank)o2;
             if(b.collideWith(t)) {
+                GameModel.getInstance().remove(t);
+                GameModel.getInstance().remove(b);
                 return  true;
             }
-//            if(b.group == t.getGroup()) return;
-//
+//            if(b.group == t.getGroup()) return true;
+////
 //            //TODO: 用一个rect来记录子弹的位置
 //            if(rect.intersects(t.rect)){
 //                b.die();
 //                t.die();
-//                int ex = t.getX() + (TANK_WIGHT - WIDTH)/2;
-//                int ey = t.getY() + (TANK_HIGHT - HIGHT)/2;
-//                gm.add(new Explode(ex,ey,gm));
+//                int ex = t.getX() + (Tank.TANK_WIGHT - Explode.WIDTH)/2;
+//                int ey = t.getY() + (Tank.TANK_HIGHT - Explode.HIGHT)/2;
+//                new Explode(ex,ey);
 //            }
         }else if (o1 instanceof Tank && o2 instanceof Bullet){
             collide(o2, o1);

@@ -16,14 +16,12 @@ import java.util.Random;
  * 坦克类
  */
 public class Tank extends GameObject{
-    public int x, y ;
     public int oldx, oldy ;
     private Dir dir = Dir.DOWN;
     private final int SPEED = 5;
     private boolean moving = false;
-    public  final int TANK_WIGHT = ResourceMgr.goodtankD.getWidth();
-    public  final int TANK_HIGHT = ResourceMgr.goodtankD.getHeight();
-    private GameModel gm = null;
+    public static   final int TANK_WIGHT = ResourceMgr.goodtankD.getWidth();
+    public static   final int TANK_HIGHT = ResourceMgr.goodtankD.getHeight();
     private boolean living = true;
     private Group group = Group.BAD;
     Random random = new Random();
@@ -31,41 +29,32 @@ public class Tank extends GameObject{
     FireStrategy fs;
 
 
-    public Tank( int x,  int y,  Dir dir,Group group, GameModel gm) {
+    public Tank( int x,  int y,  Dir dir,Group group) {
         this.x = x;
         this.y = y;
         this.dir = dir;
-        this.gm = gm;
         this.group = group;
         if(group == Group.BAD){
             moving = true;
             String FsName = (String)PropertyMgr.get("badFs");
             try {
                 fs = (FireStrategy) Class.forName(FsName).newInstance();
-            } catch (InstantiationException e) {
-                e.printStackTrace();
-            } catch (IllegalAccessException e) {
-                e.printStackTrace();
-            } catch (ClassNotFoundException e) {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }else{
             String FsName = (String)PropertyMgr.get("goodFs");
             try {
                 fs = (FireStrategy) Class.forName(FsName).newInstance();
-            } catch (InstantiationException e) {
-                e.printStackTrace();
-            } catch (IllegalAccessException e) {
-                e.printStackTrace();
-            } catch (ClassNotFoundException e) {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
-
         }
         rect.x = this.x;
         rect.y = this.y;
         rect.width = TANK_HIGHT;
         rect.height = TANK_HIGHT;
+        GameModel.getInstance().add(this);
     }
 
     public Tank() {
@@ -93,9 +82,19 @@ public class Tank extends GameObject{
         move(g);
     }
 
+    @Override
+    public int getWidth() {
+        return width;
+    }
+
+    @Override
+    public int getHeight() {
+        return height;
+    }
+
     //发射子弹
     public void  fire() {
-        if(gm.list.size() <=  50){
+        if(GameModel.getInstance().list.size() <=  50){
 
             //策略模式
             fs.fire(this);
@@ -212,8 +211,8 @@ public class Tank extends GameObject{
     //子弹射击死亡
     public void die() {
         living = false;
-        gm.remove(this);
-        gm.explode = new Explode(this.x,this.y,gm);
+        GameModel.getInstance().remove(this);
+        GameModel.getInstance().explode = new Explode(this.x,this.y);
     }
 
     public void back(){
@@ -266,14 +265,6 @@ public class Tank extends GameObject{
 
     public int getTANK_HIGHT() {
         return TANK_HIGHT;
-    }
-
-    public GameModel getGm() {
-        return gm;
-    }
-
-    public void setGm(final GameModel gm) {
-        this.gm = gm;
     }
 
     public boolean isLiving() {
