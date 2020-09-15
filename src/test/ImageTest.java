@@ -22,7 +22,7 @@ public class ImageTest {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
+        System.out.println("dadsad");
         assertNotNull(new Object());
     }
 }
